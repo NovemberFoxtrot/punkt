@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	_ "fib"
+	"server"
 )
 
 func main() {
@@ -13,4 +15,6 @@ func main() {
 	if *theVersion == true {
 		fmt.Println("0.0.1")
 	}
+
+	server.Init()
 }
