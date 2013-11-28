@@ -14,15 +14,19 @@ import (
 func TestHeader(t *testing.T) {
 	resp := httptest.NewRecorder()
 
-	uri := "/3D/header/?"
+	uri := "/"
 	path := "/home/test"
 	unlno := "997225821"
 
 	param := make(url.Values)
+
 	param["param1"] = []string{path}
 	param["param2"] = []string{unlno}
 
-	req, err := http.NewRequest("GET", uri+param.Encode(), nil)
+	// req, err := http.NewRequest("GET", uri+param.Encode(), nil)
+
+	req, err := http.NewRequest("GET", uri, nil)
+
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34,7 +38,7 @@ func TestHeader(t *testing.T) {
 	} else {
 		if strings.Contains(string(p), "Error") {
 			t.Errorf("header response shouldn't return error: %s", p)
-		} else if !strings.Contains(string(p), `expected result`) {
+		} else if !strings.Contains(string(p), "Dude") {
 			t.Errorf("header response doen't match:\n%s", p)
 		}
 	}
