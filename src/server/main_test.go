@@ -38,7 +38,7 @@ func TestHeader(t *testing.T) {
 	} else {
 		if strings.Contains(string(p), "Error") {
 			t.Errorf("header response shouldn't return error: %s", p)
-		} else if !strings.Contains(string(p), "Dude") {
+		} else if !strings.Contains(string(p), "404") {
 			t.Errorf("header response doen't match:\n%s", p)
 		}
 	}

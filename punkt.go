@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	var theVersion = flag.Bool("version", false, "print version")
+	var theVersion = flag.Bool("version", false, "version")
 
 	flag.Parse()
 
