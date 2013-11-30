@@ -1,9 +1,7 @@
 package server
 
 import (
-	_ "bufio"
 	"io/ioutil"
-	_ "net"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
