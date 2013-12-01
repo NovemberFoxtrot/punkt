@@ -36,7 +36,6 @@ func BenchmarkFib3(b *testing.B)  { benchmarkFib(3, b) }
 func BenchmarkFib10(b *testing.B) { benchmarkFib(10, b) }
 func BenchmarkFib20(b *testing.B) { benchmarkFib(20, b) }
 func BenchmarkFib40(b *testing.B) { benchmarkFib(40, b) }
-func BenchmarkFib10000(b *testing.B) { benchmarkFib(10000, b) }
 
 var result int
 
