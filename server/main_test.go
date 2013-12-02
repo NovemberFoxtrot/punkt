@@ -51,6 +51,7 @@ func TestPunkt(t *testing.T) {
 	defer ts.Close()
 
 	res, err := http.Get(ts.URL)
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -65,5 +66,26 @@ func TestPunkt(t *testing.T) {
 
 	if !strings.Contains(string(p), "punkt") {
 		t.Errorf("header response doen't match:\n%s", p)
+	}
+}
+
+func TestDude(t *testing.T) {
+	fmt.Println("Going in!")
+
+	req, err := http.NewRequest("GET", "/", nil)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	w := httptest.NewRecorder()
+
+	Index(w, req)
+
+	fmt.Printf("%d - %s", w.Code, w.Body.String())
+	fmt.Printf("%d - %s", w.Code, w.Body.String())
+
+	if w.Body.String() != "punkt" {
+		t.Errorf("header response doen't match:\n")
 	}
 }
