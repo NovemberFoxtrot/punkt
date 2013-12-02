@@ -1,5 +1,5 @@
 language: go
-go: 1.2
+go: 1.1
 script: go get github.com/NovemberFoxtrot/punkt && go test github.com/NovemberFoxtrot/punkt... && go vet github.com/NovemberFoxtrot/punkt...
 notifications:
   email:
