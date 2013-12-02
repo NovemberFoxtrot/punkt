@@ -18,5 +18,6 @@ func main() {
 
 	fmt.Println(fib.Fib(2))
 
-	server.Init()
+	http.HandleFunc("/", server.Index)
+	http.ListenAndServe(":8080", nil)
 }
