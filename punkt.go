@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-  _ "github.com/NovemberFoxtrot/punkt/src/fib"
-  "github.com/NovemberFoxtrot/punkt/src/server"
+	_ "github.com/NovemberFoxtrot/punkt/fib/"
+	"github.com/NovemberFoxtrot/punkt/server/"
 )
 
 func main() {
