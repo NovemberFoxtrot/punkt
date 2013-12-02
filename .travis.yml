@@ -1,6 +1,6 @@
 language: go
 go: 1.2
-script: go get github.com/NovemberFoxtrot/punkt && go test -cover github.com/NovemberFoxtrot/punkt... && go vet github.com/NovemberFoxtrot/punkt...
+script: go get github.com/NovemberFoxtrot/punkt && go test github.com/NovemberFoxtrot/punkt... && go vet github.com/NovemberFoxtrot/punkt...
 notifications:
   email:
     recipients:
