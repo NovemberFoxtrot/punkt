@@ -16,7 +16,7 @@ func main() {
 		fmt.Println("0.0.1")
 	}
 
-	fmt.Println(fib.Fib(1))
+	fmt.Println(fib.Fib(2))
 
 	server.Init()
 }
