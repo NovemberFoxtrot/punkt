@@ -6,7 +6,7 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Dude")
+	fmt.Fprint(w, "punkt")
 }
 
 func Init() {
