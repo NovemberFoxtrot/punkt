@@ -70,8 +70,6 @@ func TestPunkt(t *testing.T) {
 }
 
 func TestDude(t *testing.T) {
-	fmt.Println("Going in!")
-
 	req, err := http.NewRequest("GET", "/", nil)
 
 	if err != nil {
