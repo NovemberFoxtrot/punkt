@@ -11,6 +11,5 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 func Init() {
 	http.HandleFunc("/", Index)
-
 	http.ListenAndServe(":8080", nil)
 }

@@ -1,7 +1,9 @@
 package server
 
 import (
+	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -23,6 +25,8 @@ func TestHeader(t *testing.T) {
 
 	// req, err := http.NewRequest("GET", uri+param.Encode(), nil)
 
+	fmt.Println("uri:", uri)
+
 	req, err := http.NewRequest("GET", uri, nil)
 
 	if err != nil {
@@ -39,5 +43,27 @@ func TestHeader(t *testing.T) {
 		} else if !strings.Contains(string(p), "404") {
 			t.Errorf("header response doen't match:\n%s", p)
 		}
+	}
+}
+
+func TestPunkt(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(Index))
+	defer ts.Close()
+
+	res, err := http.Get(ts.URL)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	p, err := ioutil.ReadAll(res.Body)
+
+	res.Body.Close()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if !strings.Contains(string(p), "punkt") {
+		t.Errorf("header response doen't match:\n%s", p)
 	}
 }
