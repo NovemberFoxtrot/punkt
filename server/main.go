@@ -1,8 +1,8 @@
 package server
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
