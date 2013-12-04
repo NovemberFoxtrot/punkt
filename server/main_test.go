@@ -65,7 +65,7 @@ func TestPunkt(t *testing.T) {
 	}
 
 	if !strings.Contains(string(p), "punkt") {
-		t.Errorf("header response doen't match:\n%s", p)
+		t.Errorf("header response does not match:\n%s", p)
 	}
 }
 
@@ -80,7 +80,6 @@ func TestDude(t *testing.T) {
 
 	Index(w, req)
 
-	fmt.Printf("%d - %s", w.Code, w.Body.String())
 	fmt.Printf("%d - %s", w.Code, w.Body.String())
 
 	if w.Body.String() != "punkt" {
