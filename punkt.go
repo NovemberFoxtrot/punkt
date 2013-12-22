@@ -18,7 +18,7 @@ func main() {
 
 	http.HandleFunc("/", server.Index)
 
-  http.Handle("/touch", http.NotFoundHandler())
+	http.Handle("/touch", http.NotFoundHandler())
 
 	http.ListenAndServe(":8080", nil)
 }
