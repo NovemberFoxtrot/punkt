@@ -1,11 +1,12 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
+
+	"github.com/NovemberFoxtrot/punkt/templator"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "punkt")
+	templator.ThePool.Fill("index", "templates/layout.html", "templates/index.html")
+	templator.ThePool.Pools["index"].Execute(w, nil)
 }
-

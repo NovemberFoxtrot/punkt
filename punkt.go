@@ -7,7 +7,6 @@ import (
 	"os"
 
 	"github.com/NovemberFoxtrot/punkt/server"
-	"github.com/NovemberFoxtrot/punkt/templator"
 )
 
 func main() {
