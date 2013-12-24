@@ -23,5 +23,6 @@ func SetTemplates(views []View) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	SetTemplates(Views)
 	templator.ThePool.Pools["index"].Execute(w, nil)
 }
