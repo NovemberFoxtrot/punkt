@@ -21,6 +21,8 @@ func main() {
 
 	wd, _ := os.Getwd()
 
+	server.SetTemplates(server.Views)
+
 	http.HandleFunc("/", server.Index)
 
 	http.Handle("/touch", http.NotFoundHandler())

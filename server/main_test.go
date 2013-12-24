@@ -11,7 +11,12 @@ import (
 	"testing"
 )
 
+var ViewStubs = []View{
+	{"index", "../templates/layout.html", "../templates/index.html"},
+}
+
 func TestHeader(t *testing.T) {
+	SetTemplates(ViewStubs)
 	resp := httptest.NewRecorder()
 
 	uri := "/"
@@ -47,6 +52,7 @@ func TestHeader(t *testing.T) {
 }
 
 func TestPunkt(t *testing.T) {
+	SetTemplates(ViewStubs)
 	ts := httptest.NewServer(http.HandlerFunc(Index))
 	defer ts.Close()
 
@@ -69,7 +75,7 @@ func TestPunkt(t *testing.T) {
 	}
 }
 
-func TestDude(t *testing.T) {
+func TestBody(t *testing.T) {
 	req, err := http.NewRequest("GET", "/", nil)
 
 	if err != nil {
@@ -78,11 +84,13 @@ func TestDude(t *testing.T) {
 
 	w := httptest.NewRecorder()
 
+	SetTemplates(ViewStubs)
+
 	Index(w, req)
 
 	fmt.Printf("%d - %s", w.Code, w.Body.String())
 
-	if w.Body.String() != "punkt" {
-		t.Errorf("header response doen't match:\n")
+	if !strings.Contains(w.Body.String(), "punkt") {
+		t.Errorf("body response does not match:\n%s", w.Body.String())
 	}
 }
