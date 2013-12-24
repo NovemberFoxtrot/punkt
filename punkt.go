@@ -7,10 +7,12 @@ import (
 	"os"
 
 	"github.com/NovemberFoxtrot/punkt/server"
+	"github.com/NovemberFoxtrot/punkt/templator"
 )
 
 func main() {
 	var theVersion = flag.Bool("version", false, "prints version")
+	var thePort = flag.String("port", "8080", "server port")
 
 	flag.Parse()
 
@@ -24,7 +26,7 @@ func main() {
 
 	http.Handle("/touch", http.NotFoundHandler())
 
-	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir(wd+`/public`))))
+	http.Handle(`/public/`, http.StripPrefix(`/public/`, http.FileServer(http.Dir(wd+`/public`))))
 
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+*thePort, nil)
 }
