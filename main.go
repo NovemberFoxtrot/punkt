@@ -20,7 +20,12 @@ func main() {
 		os.Exit(1)
 	}
 
-	wd, _ := os.Getwd()
+	wd, err := os.Getwd()
+
+	if err != nil {
+		fmt.Println(""error:", err)
+		os.Exit(1)
+	}
 
 	server.SetTemplates(server.Views)
 
