@@ -23,7 +23,7 @@ func main() {
 	wd, err := os.Getwd()
 
 	if err != nil {
-		fmt.Println(""error:", err)
+		fmt.Println("error:", err)
 		os.Exit(1)
 	}
 
