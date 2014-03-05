@@ -33,7 +33,9 @@ func main() {
 
 	http.Handle("/touch", http.NotFoundHandler())
 
-	http.Handle(`/public/`, http.StripPrefix(`/public/`, http.FileServer(http.Dir(wd+`/public`))))
+	fileServer := server.LoggingFunc(http.FileServer(http.Dir(wd + `/public`)))
+
+	http.Handle(`/public/`, http.StripPrefix(`/public/`, fileServer))
 
 	http.ListenAndServe(":"+*thePort, nil)
 }
