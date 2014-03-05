@@ -17,6 +17,7 @@ func main() {
 
 	if *theVersion == true {
 		fmt.Println("0.0.1")
+		os.Exit(1)
 	}
 
 	wd, _ := os.Getwd()
