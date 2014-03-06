@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	var theVersion = flag.Bool("version", false, "prints version")
+	var theVersion = flag.Bool("version", false, "version")
 	var thePort = flag.String("port", "8080", "server port")
 
 	flag.Parse()
