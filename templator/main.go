@@ -20,7 +20,7 @@ func render(filenames ...string) *template.Template {
 	t, err := t.ParseFiles(filenames...)
 
 	if err != nil {
-		log.Fatal("error parsing files", err)
+		log.Fatal("parsing error:", err)
 	}
 
 	return t
