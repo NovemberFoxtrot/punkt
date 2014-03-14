@@ -10,15 +10,9 @@ import (
 )
 
 func main() {
-	var theVersion = flag.Bool("version", false, "version")
 	var thePort = flag.String("port", "8080", "port")
 
 	flag.Parse()
-
-	if *theVersion == true {
-		fmt.Println("0.0.2")
-		os.Exit(0)
-	}
 
 	wd, err := os.Getwd()
 
