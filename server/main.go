@@ -31,7 +31,7 @@ func SetTemplates(views []View) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	data := map[string]interface{}{"dude": []interface{}{1, 2, 3}}
+	data := map[string]interface{}{"dude": []interface{}{1}}
 
 	templator.ThePool.Pools["index"].Execute(w, data)
 }
