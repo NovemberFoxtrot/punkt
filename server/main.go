@@ -1,8 +1,8 @@
 package server
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 
 	"github.com/NovemberFoxtrot/punkt/templator"
 )
@@ -31,6 +31,13 @@ func SetTemplates(views []View) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	fmt.Println(r.URL)
+
+	if r.Method == "POST" {
+		fmt.Println(r.FormValue("Name"))
+	}
+
 	data := map[string]interface{}{"dude": []interface{}{1}}
 
 	templator.ThePool.Pools["index"].Execute(w, data)
