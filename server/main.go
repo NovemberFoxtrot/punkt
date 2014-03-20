@@ -2,9 +2,12 @@ package server
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"strings"
 
 	"github.com/NovemberFoxtrot/punkt/templator"
+	"github.com/iwanbk/gobeanstalk"
 )
 
 type View struct {
@@ -33,12 +36,32 @@ func SetTemplates(views []View) {
 func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	fmt.Println(r.URL)
+	fmt.Println(r.Header.Get("Accept-Language"))
+
+	translations := map[string]string{}
+
+	if strings.HasPrefix(r.Header.Get("Accept-Language"), "ja") == true {
+		fmt.Println("ja")
+		translations["greeting"] = "今日は"
+	}
 
 	if r.Method == "POST" {
 		fmt.Println(r.FormValue("Name"))
+
+		conn, err := gobeanstalk.Dial("localhost:11300")
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		id, err := conn.Put([]byte(r.FormValue("Name")), 0, 0, 10)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Printf("Job id %d inserted\n", id)
 	}
 
-	data := map[string]interface{}{"dude": []interface{}{1}}
-
-	templator.ThePool.Pools["index"].Execute(w, data)
+	templator.ThePool.Pools["index"].Execute(w, translations)
 }
