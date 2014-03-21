@@ -46,7 +46,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == "POST" {
-		fmt.Println(r.FormValue("Name"))
+		fmt.Println(r.FormValue("email"))
 
 		conn, err := gobeanstalk.Dial("localhost:11300")
 
