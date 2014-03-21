@@ -1,4 +1,4 @@
-package templator
+package main
 
 import (
 	"html/template"

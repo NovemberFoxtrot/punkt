@@ -1,4 +1,4 @@
-package server
+package main
 
 import (
 	"fmt"
@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/NovemberFoxtrot/punkt/templator"
 	"github.com/iwanbk/gobeanstalk"
 )
 
@@ -29,7 +28,7 @@ var Views = []View{
 
 func SetTemplates(views []View) {
 	for _, view := range views {
-		templator.ThePool.Fill(view.Index, view.Layout, view.Content)
+		ThePool.Fill(view.Index, view.Layout, view.Content)
 	}
 }
 
@@ -63,5 +62,5 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("Job id %d inserted\n", id)
 	}
 
-	templator.ThePool.Pools["index"].Execute(w, translations)
+	ThePool.Pools["index"].Execute(w, translations)
 }

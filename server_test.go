@@ -1,4 +1,4 @@
-package server
+package main
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 )
 
 var ViewStubs = []View{
-	{"index", "../templates/layout.html", "../templates/index.html"},
+	{"index", "templates/layout.html", "templates/index.html"},
 }
 
 func TestHeader(t *testing.T) {

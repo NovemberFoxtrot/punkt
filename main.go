@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-
-	"github.com/NovemberFoxtrot/punkt/server"
 )
 
 func main() {
@@ -21,13 +19,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	server.SetTemplates(server.Views)
+	SetTemplates(Views)
 
-	http.HandleFunc("/", server.Index)
+	http.HandleFunc("/", Index)
 
 	http.Handle("/touch", http.NotFoundHandler())
 
-	fileServer := server.LoggingFunc(http.FileServer(http.Dir(wd + `/public`)))
+	fileServer := LoggingFunc(http.FileServer(http.Dir(wd + `/public`)))
 
 	http.Handle(`/public/`, http.StripPrefix(`/public/`, fileServer))
 
