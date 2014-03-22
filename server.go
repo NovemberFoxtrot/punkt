@@ -33,15 +33,12 @@ func SetTemplates(views []View) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r)
-	fmt.Println(r.URL)
-	fmt.Println(r.Header.Get("Accept-Language"))
-
 	translations := map[string]string{}
 
 	if strings.HasPrefix(r.Header.Get("Accept-Language"), "ja") == true {
-		fmt.Println("ja")
 		translations["greeting"] = "今日は"
+	} else {
+		translations["greeting"] = "Hello"
 	}
 
 	if r.Method == "POST" {
