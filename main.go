@@ -80,7 +80,7 @@ func render(filenames ...string) *template.Template {
 	t, err := t.ParseFiles(filenames...)
 
 	if err != nil {
-		log.Fatal("parsing error:", err)
+		log.Fatal("parsing:", err)
 	}
 
 	return t
