@@ -59,7 +59,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 
-		fmt.Printf("Job id %d inserted\n", id)
+		fmt.Printf("Job %d inserted\n", id)
 	}
 
 	ThePool.Pools["index"].Execute(w, translations)
