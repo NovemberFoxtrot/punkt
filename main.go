@@ -26,6 +26,7 @@ func LoggingFunc(h http.Handler) http.Handler {
 }
 
 var Views = []View{
+	{"about", "templates/layout.html", "templates/about.html"},
 	{"index", "templates/layout.html", "templates/index.html"},
 }
 
@@ -33,6 +34,10 @@ func SetTemplates(views []View) {
 	for _, view := range views {
 		ThePool.Fill(view.Index, view.Layout, view.Content)
 	}
+}
+
+func About(w http.ResponseWriter, r *http.Request) {
+	ThePool.Pools["about"].Execute(w, nil)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -108,6 +113,7 @@ func main() {
 
 	SetTemplates(Views)
 
+	http.HandleFunc("/about", About)
 	http.HandleFunc("/", Index)
 
 	http.Handle("/touch", http.NotFoundHandler())
