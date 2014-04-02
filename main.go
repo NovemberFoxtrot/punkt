@@ -32,12 +32,11 @@ func render(filenames ...string) *template.Template {
 }
 
 func About(w http.ResponseWriter, r *http.Request) {
-	render("templates/layout.html", "templates/about.html").Execute(w, nil)
+	t := render("templates/layout.html", "templates/about.html")
+	t.Execute(w, nil)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r)
-
 	translations := map[string]string{}
 
 	if strings.HasPrefix(r.Header.Get("Accept-Language"), "ja") == true {
@@ -86,9 +85,7 @@ func main() {
 
 	http.Handle("/touch", http.NotFoundHandler())
 
-	// fileServer := LoggingFunc(http.FileServer(http.Dir(wd + `/public`)))
-
-	fileServer := http.FileServer(http.Dir(wd + `/public`))
+	fileServer := LoggingFunc(http.FileServer(http.Dir(wd + `/public`)))
 
 	http.Handle(`/public/`, http.StripPrefix(`/public/`, fileServer))
 
