@@ -11,12 +11,7 @@ import (
 	"testing"
 )
 
-var ViewStubs = []View{
-	{"index", "templates/layout.html", "templates/index.html"},
-}
-
 func TestHeader(t *testing.T) {
-	SetTemplates(ViewStubs)
 	resp := httptest.NewRecorder()
 
 	uri := "/"
@@ -52,7 +47,6 @@ func TestHeader(t *testing.T) {
 }
 
 func TestPunkt(t *testing.T) {
-	SetTemplates(ViewStubs)
 	ts := httptest.NewServer(http.HandlerFunc(Index))
 	defer ts.Close()
 
@@ -83,8 +77,6 @@ func TestBody(t *testing.T) {
 	}
 
 	w := httptest.NewRecorder()
-
-	SetTemplates(ViewStubs)
 
 	Index(w, req)
 
