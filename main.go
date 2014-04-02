@@ -12,12 +12,6 @@ import (
 	"github.com/iwanbk/gobeanstalk"
 )
 
-type View struct {
-	Index   string
-	Layout  string
-	Content string
-}
-
 func LoggingFunc(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(*r.URL)
@@ -25,22 +19,25 @@ func LoggingFunc(h http.Handler) http.Handler {
 	})
 }
 
-var Views = []View{
-	{"about", "templates/layout.html", "templates/about.html"},
-	{"index", "templates/layout.html", "templates/index.html"},
-}
+func render(filenames ...string) *template.Template {
+	t := template.New("layout")
 
-func SetTemplates(views []View) {
-	for _, view := range views {
-		ThePool.Fill(view.Index, view.Layout, view.Content)
+	t, err := t.ParseFiles(filenames...)
+
+	if err != nil {
+		log.Fatal("parsing:", err)
 	}
+
+	return t
 }
 
 func About(w http.ResponseWriter, r *http.Request) {
-	ThePool.Pools["about"].Execute(w, nil)
+	render("templates/layout.html", "templates/about.html").Execute(w, nil)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+
 	translations := map[string]string{}
 
 	if strings.HasPrefix(r.Header.Get("Accept-Language"), "ja") == true {
@@ -67,36 +64,9 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("Job %d inserted\n", id)
 	}
 
-	ThePool.Pools["index"].Execute(w, translations)
-}
+	t := render("templates/layout.html", "templates/index.html")
 
-var ThePool Pool
-
-type TemplateCache map[string]*template.Template
-
-type Pool struct {
-	Pools TemplateCache
-}
-
-func render(filenames ...string) *template.Template {
-	t := template.New("layout")
-	t.Delims("^^", "^^")
-
-	t, err := t.ParseFiles(filenames...)
-
-	if err != nil {
-		log.Fatal("parsing:", err)
-	}
-
-	return t
-}
-
-func (p *Pool) Fill(key string, filenames ...string) {
-	if p.Pools == nil {
-		p.Pools = make(TemplateCache)
-	}
-
-	p.Pools[key] = render(filenames...)
+	t.Execute(w, translations)
 }
 
 func main() {
@@ -111,14 +81,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	SetTemplates(Views)
-
 	http.HandleFunc("/about", About)
 	http.HandleFunc("/", Index)
 
 	http.Handle("/touch", http.NotFoundHandler())
 
-	fileServer := LoggingFunc(http.FileServer(http.Dir(wd + `/public`)))
+	// fileServer := LoggingFunc(http.FileServer(http.Dir(wd + `/public`)))
+
+	fileServer := http.FileServer(http.Dir(wd + `/public`))
 
 	http.Handle(`/public/`, http.StripPrefix(`/public/`, fileServer))
 

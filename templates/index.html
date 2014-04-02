@@ -1,4 +1,4 @@
-^^ define "content" ^^
+{{ define "content" }}
 <div class="main-container">
 	<div class="main wrapper clearfix">
 		<div>
@@ -7,7 +7,7 @@
 		</div>
 	<div>
 
-	<h2>article section ^^ .greeting ^^</h2>
+	<h2>article section {{ .greeting }}</h2>
 
 	<form method="POST">
 		<input type="text" name="email">
@@ -24,4 +24,4 @@
 	<h3>sidekick</h3>
 	<p>Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices.</p>
 </div>
-^^ end ^^
+{{ end }}
