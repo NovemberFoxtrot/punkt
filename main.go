@@ -68,6 +68,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, translations)
 }
 
+func Privacy(w http.ResponseWriter, r *http.Request) {
+	t := render("templates/layout.html", "templates/privacy.html")
+	t.Execute(w, nil)
+}
+
 func main() {
 	var thePort = flag.String("port", "8080", "port")
 
@@ -81,6 +86,7 @@ func main() {
 	}
 
 	http.HandleFunc("/about", About)
+	http.HandleFunc("/privacy", Privacy)
 	http.HandleFunc("/", Index)
 
 	http.Handle("/touch", http.NotFoundHandler())
