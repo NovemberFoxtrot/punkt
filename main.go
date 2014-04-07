@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strings"
 
 	"github.com/iwanbk/gobeanstalk"
 )
@@ -37,14 +36,6 @@ func About(w http.ResponseWriter, r *http.Request) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	translations := map[string]string{}
-
-	if strings.HasPrefix(r.Header.Get("Accept-Language"), "ja") == true {
-		translations["greeting"] = "今日は"
-	} else {
-		translations["greeting"] = "Hello"
-	}
-
 	if r.Method == "POST" {
 		fmt.Println(r.FormValue("email"))
 
@@ -65,7 +56,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 	t := render("templates/layout.html", "templates/index.html")
 
-	t.Execute(w, translations)
+	t.Execute(w, nil)
 }
 
 func Privacy(w http.ResponseWriter, r *http.Request) {
