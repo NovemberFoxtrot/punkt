@@ -8,26 +8,29 @@ body {
 	margin: 0 auto;	
 }
 
-#nav {
-	float: left;
-	width: 200px;
-}
-
 .section {
-	position: relative;
-	top: -20px;
-	left: 20px;
 	background-color:white;
-  width: 500px;
   margin: 20px auto;
-  padding: 50px;
+  padding: 20px;
   border-width: 10px;
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
 
+@media screen and (min-width:600px) {
+	#nav {
+		float: left;
+		width: 25%;;
+	}
 
-.section {
-	margin-left: 200px;
+	.section {
+		margin-left: 33%;
+	}
+}
+
+@media screen and (max-width:599px) {
+	#nav li {
+		display: inline;
+	}
 }
