@@ -35,8 +35,15 @@ func About(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 }
 
+type entry struct {
+	Title string
+	Body  string
+}
+
 func Index(w http.ResponseWriter, r *http.Request) {
-	data := []interface{}{1,2,"Hi"}
+	data := []entry{
+		{"title", "body"},
+	}
 
 	if r.Method == "POST" {
 		fmt.Println(r.FormValue("email"))
