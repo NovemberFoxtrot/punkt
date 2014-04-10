@@ -36,6 +36,8 @@ func About(w http.ResponseWriter, r *http.Request) {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	data := []interface{}{1,2,"Hi"}
+
 	if r.Method == "POST" {
 		fmt.Println(r.FormValue("email"))
 
@@ -56,7 +58,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 	t := render("templates/layout.html", "templates/index.html")
 
-	t.Execute(w, nil)
+	t.Execute(w, data)
 }
 
 func Privacy(w http.ResponseWriter, r *http.Request) {
