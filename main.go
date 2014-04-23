@@ -43,6 +43,7 @@ type entry struct {
 func Index(w http.ResponseWriter, r *http.Request) {
 	data := []entry{
 		{"Bicycle {2014-04-22}", "To the house and up the elevator. To the documents then back down even further. On my bicycle passing walkers. To the left. To the right. At the bank. Upstairs for candy again. Thank you very much. On my way again."},
+		{"Bicycle {2014-04-23}", "Up early. Too early. Visions during the night haunt. Up down left right go the heavies. Sleepy day."},
 	}
 
 	if r.Method == "POST" {
